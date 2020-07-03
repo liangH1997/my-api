@@ -9,8 +9,9 @@ var jwt = require('../utils/jwt')
 var User = require('../model/user')
 var Banner = require('../model/banner')
 
-/* 添加商品*/
+/* 添加商品*/   //修改商品信息
 router.post('/addGood', function(req, res, next) {
+  var {img,name,desc,price,cate,hot,id}=req.body
   for(var key in req.body){
     // console.log(req.body[key])
     if(!req.body[key]){
@@ -21,26 +22,39 @@ router.post('/addGood', function(req, res, next) {
     }
   }
   var item = {
-    img: req.body.img,
-    name: req.body.name,
-    desc: req.body.desc,
-    price: req.body.price,
-    cate: req.body.cate,
-    hot : req.body.hot,
+    img: img,
+    name: name,
+    desc: desc,
+    price: price,
+    cate: cate,
+    hot : hot,
     create_time : Date.now()
   }
-  Good.insertMany([item]).then(()=>{
-    res.json({
-      err : 0,
-      msg : '添加成功'
-    });
-  })
-  
+  if(id){
+    Good.updateOne({_id:id},item).then(()=>{
+      res.json({
+        err : 0,
+        msg : '修改成功'
+      })
+    }).catch(()=>{
+      res.json({
+        err : 1,
+        msg : '修改失败'
+      })
+    })
+  }else{
+    Good.insertMany([item]).then(()=>{
+      res.json({
+        err : 0,
+        msg : '添加成功'
+      });
+    })
+  }
 });
 
 // 获取首页推荐商品
 router.get('/getHotGoodList', function(req, res, next) {
-  console.log(req.query)
+  // console.log(req.query)
   var {hot,page,size,cate} = req.query
   if(!page) return res.json({err:1,msg:'page为必填项'})
   page = parseInt(page)
@@ -259,4 +273,14 @@ router.get('/getAd', function(req, res, next) {
   })
 });
 
+// 删除商品
+router.get('/delGood', function(req, res, next) {
+  var {id} = req.query
+  Good.deleteOne({_id:id}).then(()=>{
+    res.json({
+      err : 0,
+      msg : '删除成功'
+    })
+  })
+});
 module.exports = router;

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var md5 = require('md5')
+var jwt = require('../utils/jwt')
 
 var User = require('../model/user')
 var jwt = require('../utils/jwt')
@@ -18,6 +19,7 @@ router.post('/login', function(req, res, next) {
         err : 0,
         msg : '登录成功',
         data : {
+          username : username,
           token : jwt.createToken({username,password : md5(password)})
         }
         
@@ -43,5 +45,23 @@ router.post('/regist', function(req, res, next) {
     })
   })
 });
+
+// 获取用户信息
+router.get('/getInfo',function(req,res){
+  var token = req.headers.authorization
+  var data = jwt.verify(token)
+  User.find({username:data.username}).then(arr=>{
+    res.json({
+      err : 0,
+      msg : '获取成功',
+      data : arr[0]
+    })
+  }).catch(()=>{
+    res.json({
+      err : 1,
+      msg : '获取失败'
+    })
+  })
+})
 
 module.exports = router;

@@ -8,6 +8,8 @@ var app = require('../app');
 var debug = require('debug')('my-api:server');
 var http = require('http');
 
+
+
 // 连接数据库
 var mongoose = require('mongoose')
 
@@ -37,6 +39,11 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+const io = require('socket.io')(server);
+io.on('connection', client => {
+  console.log('有人链接了')
+  io.on('myMsg', data => { console.log('data',data)});
+});
 /**
  * Listen on provided port, on all network interfaces.
  */
