@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose')
 var Good = require('../model/good')
 var Cate = require('../model/cates')
 var Cart = require('../model/carts')
@@ -273,6 +272,38 @@ router.get('/getAd', function(req, res, next) {
   })
 });
 
+// 删除banner
+router.get('/delAd',function(req,res){
+  var {id} = req.query
+  Banner.deleteOne({_id:id}).then(()=>{
+    res.json({
+      err : 0,
+      msg : '删除成功'
+    }).catch(()=>{
+      res.json({
+        err : 1,
+        msg : '删除失败'
+      })
+    })
+  })
+})
+
+// 修改banner
+router.post('/updateAd',function(req,res){
+  var {title,img,qfAd,id} = req.body
+  Banner.updateOne({_id:id},{title,img,qfAd}).then(()=>{
+    res.json({
+      err : 0,
+      msg : '修改成功'
+    })
+  }).catch(()=>{
+    res.json({
+      err : 1,
+      msg : '修改失败'
+    })
+  })
+})
+
 // 删除商品
 router.get('/delGood', function(req, res, next) {
   var {id} = req.query
@@ -283,4 +314,5 @@ router.get('/delGood', function(req, res, next) {
     })
   })
 });
+
 module.exports = router;
