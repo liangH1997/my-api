@@ -186,7 +186,6 @@ npm install nodemon -g  // 全局安装nodemon
 * StackOverflow：学习中遇到的问题查询
 * SegmentFault：问题查询
 
-
 --------------------------------------------------
 
 #### 2、Node.js安装
@@ -450,7 +449,7 @@ querystring.unescape() // 与querystring.escape互逆
 	第一步：抓取首页源码字符串
 		https.get(url, fn)
 		用于抓取页面中的静态内容和数据
-
+	
 	第二步：使用 cheerio 进一步处理源码字符串，获取到品类名称
 		```
 		npm install cheerio -D
@@ -463,10 +462,10 @@ querystring.unescape() // 与querystring.escape互逆
 
 	https.request() 报错“Error: getaddrinfo ENOTFOUND https://cnodejs.org”
 		解决办法：把 hostname 中的"https://wwww"去掉
-
+	
 	GET 的请求方式
 		demo:从cnode开放平台获取文章列表
-
+	
 	POST 的请求方式
 		demo:执行cnode开放平台上的文件收藏功能
 
@@ -705,7 +704,7 @@ var Test = require('./test')   // .js后缀可以省略
 
 	MongoDB是一个基于分布式文件存储的数据库，由C++编写，旨在为WEB应用提供可扩展的高性能数据存储解决方案。
 	特点：高性能、易部署、易使用、存储数据非常方便。
-
+	
 	相关术语：
 		database  数据库
 		collection  集合
@@ -713,12 +712,12 @@ var Test = require('./test')   // .js后缀可以省略
 		field  域
 		index  索引
 		primary_key  自动地使用_id字段作为主键
-
+	
 	文档：即键值对(BSON，二进制的JSON)，文档中不需要设置对等的字段，并且相同字段的值可以是不同的数据类型，这是与关系型数据库有很大的区别。
 	示例：{"_id": ObjectId{"s232323232"}, name: geekxia, age: 20}
-
+	
 	集合：集合是文档的组，集合存在于数据库中，集合中没有固定的数据结构。但同一个集合中的文档通常有一定的关联性。
-
+	
 	MongoDB的数据类型：
 		String
 		Integer
@@ -743,7 +742,7 @@ var Test = require('./test')   // .js后缀可以省略
 		db.help()
 		db.test.help()
 		db.test.find().help()
-
+	
 	2、数据库操作命令
 		show dbs
 		use dbname  切换数据库
@@ -752,7 +751,7 @@ var Test = require('./test')   // .js后缀可以省略
 		db.version()  查看当前DB的版本
 		db.getMongo()  查看当前DB的连接的主机地址
 		db.dropDatabase()  删除当前DB
-
+	
 	3、创建数据库和集合
 		use project  不存在就创建，存在就切换至
 		db.createCollection('user')  // 创建user集合
@@ -762,21 +761,21 @@ var Test = require('./test')   // .js后缀可以省略
 		db.user.isCapped()  判断集合是否为定容量
 		db.getCollection('music')  获取指定集合
 		db.printCollectionStats()  打印指定集合的状态
-
+	
 	4、集合中的文档操作：
 		db.user.insertOne({})  向集合中插入文档
 		db.user.insertMany([{},{}])
 		db.user.save({})
-
+	
 		db.user.updateOne({"name":"geekxia"}, {$set:{"age":100}})
 		db.user.updateMany({},{$set:{}})
-
+	
 		db.user.deleteOne({"name":"jiaming"})
 		db.user.deleteMany()
 		db.user.remove({})   // 要指出删除的条件
-
+	
 		db.user.find()
-
+	
 	5、文档操作的综合示例
 		db.user.findAndModify({
 			query: {age: {$gte: 25}},
@@ -792,7 +791,7 @@ var Test = require('./test')   // .js后缀可以省略
 			update: {$set:{name:'a'},$inc:{age:2}},
 			remove: true
 		});
-
+	
 	6、聚集集合查询
 		db.user.find()     查询所有记录
 		db.user.distinct('name')    以name字段去重查询
@@ -818,7 +817,7 @@ var Test = require('./test')   // .js后缀可以省略
 		db.user.find({age:{$gte:25}}).count()  查询满足条件的记录的总条数
 		db.user.find({grade:{$exists:true}})  查询含有grade字段的记录
 		db.user.find({grade:{$exists:true}}).count()  查询存在sex字段的记录的总条数
-
+	
 	7、实战mongo shell
 		构造一批假数据，使用insertMany()入库
 		然后就可以使用上述命令进行实战练习了
@@ -906,11 +905,11 @@ npm start   // nodemon ./bin/www
 		ejs 页面模块
 		morgan 是一个日志工具
 		serve-favicon 用于设置网站的favicon
-
+	
 	(2) /bin/www 入口文件详解
 		端口号设置
 		服务启动时的事件监听onError / onListen
-
+	
 	(3)app.js文件详解
 		中间件：next()表示交给下一个中间件处理
 		路由配置：res.render('index', {})渲染index模板引擎
@@ -919,7 +918,7 @@ npm start   // nodemon ./bin/www
 		bodyParser中间件，用于处理form表单默认的 application/x-www-form-urlencoded 数据编码
 		cookieParser中间件，用于解析cookie数据
 		404中间件，渲染error模板引擎
-
+	
 	(4)路由详解
 		不能两次调用 res.send()
 		向前端发送文件
@@ -931,7 +930,7 @@ npm start   // nodemon ./bin/www
 			router.all('/xxx', function(req,res,next){})
 			路由可以使用正则表达式
 			router.get('/ab*cd', fn)
-
+	
 	(5)ejs模板引擎详解
 		结合ejs官网，介绍什么是ejs？
 		常用标签介绍（在代码中演示一下这些标签的用法）：
@@ -1199,3 +1198,276 @@ req.session.isLogin = true
 在其它页面中：<%- include('bar', {title: ''}) %>
 ```
 * 在退出登录`GET /users/logout`时，重置或销毁Ses
+
+
+
+
+
+## 京东商品接口文档
+
+### 登录注册
+
+baseUrl : /user
+
+#### 用户注册
+
+请求方式 ： POST
+
+URL ：/regist
+
+参数：
+
+|   参数   | 是否必传 | 数据类型 |  描述  |
+| :------: | :------: | :------: | :----: |
+| username |    是    |  String  | 用户名 |
+| password |    是    |  String  |  密码  |
+
+
+
+#### 用户登录
+
+请求方式 ： POST
+
+URL ：/login
+
+参数：
+
+|   参数   | 是否必传 | 数据类型 |  描述  |
+| :------: | :------: | :------: | :----: |
+| username |    是    |  String  | 用户名 |
+| password |    是    |  String  |  密码  |
+
+
+
+#### 获取用户信息
+
+请求方式 ： get
+
+URL ：/getInfo
+
+参数：
+
+| 参数 | 是否必传 | 数据类型 | 描述 |
+| :--: | :------: | :------: | :--: |
+|      |          |          |      |
+
+
+
+
+
+### 商品接口
+
+baseUrl : /jd
+
+#### 添加商品/修改商品信息
+
+请求方式 ： POST
+
+URL ：/addGood
+
+参数：
+
+| 参数  | 是否必传 | 数据类型 |               描述               |
+| :---: | :------: | :------: | :------------------------------: |
+|  img  |    是    |  String  |             图片URL              |
+| name  |    是    |  String  |             商品名称             |
+| desc  |    是    |  String  |             商品详情             |
+| price |    是    |  Number  |             商品价格             |
+| cate  |    是    |  String  |               品类               |
+|  hot  |    是    | Boolean  |             是否热销             |
+|  id   |    否    |  String  | 不传为添加商品，反之修改商品信息 |
+
+
+
+#### 删除商品
+
+请求方式 ： GET
+
+URL ：/delGood
+
+参数：
+
+| 参数 | 是否必传 | 数据类型 |  描述  |
+| :--: | :------: | :------: | :----: |
+|  id  |    是    |  String  | 商品id |
+
+
+
+#### 获取热销商品/根据品类筛选
+
+请求方式 ： GET
+
+URL ：/getHotGoodList
+
+参数：
+
+| 参数 | 是否必传 | 数据类型 |     描述      |
+| :--: | :------: | :------: | :-----------: |
+| page |    是    |  String  |    图片URL    |
+| size |    否    |  Number  | size?size:10  |
+| hot  |    否    | Boolean  | hot?hot:false |
+
+
+
+#### 获取全部品类
+
+请求方式 ： GET
+
+URL ：/getAllCates
+
+参数：
+
+| 参数 | 是否必传 | 数据类型 | 描述 |
+| :--: | :------: | :------: | :--: |
+|      |          |          |      |
+
+
+
+#### 基于品类筛选
+
+请求方式 ： GET
+
+URL ：/getCateGoodList
+
+参数：
+
+| 参数 | 是否必传 | 数据类型 | 描述 |
+| :--: | :------: | :------: | :--: |
+| cate |    是    |  String  | 品类 |
+
+
+
+#### 获取商品详情
+
+请求方式 ： GET
+
+URL ：/getGoodDetail
+
+参数：
+
+|  参数   | 是否必传 | 数据类型 | 描述 |
+| :-----: | :------: | :------: | :--: |
+| good_id |    是    |  String  |      |
+
+
+
+
+
+#### 添加到购物车
+
+请求方式 ： POST
+
+URL ：/addToCart
+
+参数：
+
+|  参数   | 是否必传 | 数据类型 | 描述 |
+| :-----: | :------: | :------: | :--: |
+| good_id |    是    |  String  |      |
+
+
+
+#### 获取购物车列表
+
+请求方式 ： POST
+
+URL ：/getCartList
+
+参数：
+
+| 参数 | 是否必传 | 数据类型 | 描述 |
+| :--: | :------: | :------: | :--: |
+|      |          |          |      |
+
+
+
+#### 更改购物车商品数量
+
+请求方式 ： POST
+
+URL ：/updateCartNum
+
+参数：
+
+| 参数 | 是否必传 | 数据类型 |   描述   |
+| :--: | :------: | :------: | :------: |
+| num  |    是    |  Number  | 商品数量 |
+|  id  |    是    |  String  |  商品id  |
+
+
+
+#### 删除购物车商品
+
+请求方式 ： GET
+
+URL ：/deleteToCart
+
+参数：
+
+| 参数 | 是否必传 | 数据类型 |  描述  |
+| :--: | :------: | :------: | :----: |
+|  id  |    是    |  String  | 商品id |
+
+
+
+### banner接口
+
+#### 添加一张banner
+
+请求方式 ： GET
+
+URL ：/ad
+
+参数：
+
+| 参数  | 是否必传 | 数据类型 |      描述      |
+| :---: | :------: | :------: | :------------: |
+|  img  |    是    |  String  | banner图片地址 |
+| title |    是    |  String  |      主题      |
+| qfAd  |    是    |  String  |      内容      |
+
+
+
+#### 获取所有banner
+
+请求方式 ： GET
+
+URL ：/getAd
+
+参数：
+
+| 参数 | 是否必传 | 数据类型 | 描述 |
+| :--: | :------: | :------: | :--: |
+|      |          |          |      |
+
+
+
+#### 删除banner
+
+请求方式 ： GET
+
+URL ：/delAd
+
+参数：
+
+| 参数 | 是否必传 | 数据类型 |    描述    |
+| :--: | :------: | :------: | :--------: |
+|  id  |    是    |  String  | banner  id |
+
+
+
+#### 修改banner
+
+请求方式 ： POST
+
+URL ：/updateAd
+
+参数：
+
+| 参数  | 是否必传 | 数据类型 |    描述     |
+| :---: | :------: | :------: | :---------: |
+| title |    是    |  String  |             |
+|  img  |    是    |  String  |     url     |
+| qfAd  |    是    |  String  |             |
+|  id   |    是    |  String  | banner   id |
+
